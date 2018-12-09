@@ -24,6 +24,7 @@ namespace MutableDataGridSync.Views
             }
         }
         public event EventHandler UpdateTable;
+        public event EventHandler<DataRow> RowChanged;
 
         public View()
         {
@@ -34,6 +35,12 @@ namespace MutableDataGridSync.Views
         private void UpdateButton_Click(object sender, EventArgs e)
         {
             UpdateTable?.Invoke(sender, EventArgs.Empty);
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = ((DataRowView) dataGridView1.Rows[e.RowIndex].DataBoundItem).Row;
+            RowChanged?.Invoke(this, row);
         }
     }
 }

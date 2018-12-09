@@ -44,13 +44,9 @@ namespace MutableDataGridSync.Presenter
                 _lichtpunktRepository.Update();
                 Console.WriteLine("Updated");
             };
-            dataTable.RowChanged += (sender, args) =>
+            _view.RowChanged += (sender, row) =>
             {
-                if (args.Action == DataRowAction.Change)
-                {
-                    args.Row.SetField<string>(idColumn, Guid.NewGuid().ToString());
-                    Console.WriteLine(args.Row);
-                }
+                row.SetField(idColumn, Guid.NewGuid().ToString());
             };
         }
     }
