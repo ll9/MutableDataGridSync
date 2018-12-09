@@ -41,6 +41,7 @@ namespace MutableDataGridSync.Repositories
                 {
                     _table = new DataTable();
                 }
+                _table.PrimaryKey = new DataColumn[] { _table.Columns["ogc_fid"] };
                 adapter.Fill(_table);
 
                 return _table;
